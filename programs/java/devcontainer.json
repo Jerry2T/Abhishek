@@ -1,0 +1,11 @@
+{
+    "name": "BUG-FREE SPACE COUSCOUS",
+    "dockerFile": "Dockerfile",
+    "settings": {
+      "java.home": "/usr/lib/jvm/java-11-openjdk-amd64"
+    },
+    "extensions": [
+      "vscjava.vscode-java-pack"
+    ]
+  }
+  
