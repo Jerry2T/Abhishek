@@ -27,5 +27,6 @@
             "database": "mysqls",
             "username": "hello"
         }
-    ]
+    ],
+    "oracledevtools.defaultConnection": "ROOT.XEPDB1"
 }
