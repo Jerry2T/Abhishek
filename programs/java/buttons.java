@@ -2,7 +2,6 @@ import java.io.*;
 import javax.swing.*;
 
 class GFG {
-
 	public static void main(String[] args){		
 		JFrame frame = new JFrame();
 		JButton button = new JButton(" GFG WebSite Click");
