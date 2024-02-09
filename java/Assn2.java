@@ -2,14 +2,11 @@ import java.util.Scanner;
 
 public class Assn2 {
     public static void main(String arr[]){
-        Scanner sc=new Scanner(System.in);
-        
+        Scanner sc=new Scanner(System.in);        
         System.out.print("Enter no.1: ");
         long ano=sc.nextInt();
-
         System.out.print("Enter no.2: ");
         long bno=sc.nextInt();
-
         long res=multi(ano,bno);
         long result=adds(res);
         System.out.println("Final ans: "+result);
