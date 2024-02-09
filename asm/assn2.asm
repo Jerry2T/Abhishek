@@ -7,10 +7,21 @@ section .data
 
 section .bss
 	charans resb 2
-
+	string resb 50
+	string2 equ $ -string
+	count resb 1
+	
 %macro Print 2
 	mov rax,1
 	mov rdi,1
+	mov rsi,%1
+	mov rdx,%2
+	syscall
+%endmacro
+
+%macro Read 2
+	mov rax,0
+	mov rdi,0
 	mov rsi,%1
 	mov rdx,%2
 	syscall
@@ -25,18 +36,23 @@ section .bss
 section .text
 	global _start
 _start:
-	mov rax,20	
+	Print mes,mesl
+	Read string,string2
+	mov [count],rax	
+	Print sms,smsl
+	mov rax,[count]
+	dec rax
 	call display
 	exit
 
 display:
-    mov rbx,16
+    mov rbx,10
     mov rcx,2
     mov rsi,charans+1
 
-back:
+cnt:
     mov rdx,0
-    div rbx ;rax,rbx
+    div rbx 
 
     cmp dl,09h
     jbe add30
@@ -47,7 +63,7 @@ add30:
     mov [rsi],dl
     dec rsi
     dec rcx
-    jnz back
+    jnz cnt
 
     Print charans,2
     ret
