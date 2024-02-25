@@ -2,36 +2,34 @@ import java.util.Scanner;
 import java.lang.Math;
 
 abstract class Shape{
-	float fArea;
-	float fPerimeter;
+	double dArea;
+	double dPerimeter;
 	String sColor;
 	abstract void accept();
-	abstract void calcArea();
-	abstract void calcPerimeter();
+	abstract void area();
+	abstract void perimeter();
 	abstract void setColor();
-	public void printCalculated(){
-		System.out.println("\nArea of the Shape is:"+fArea);
-		System.out.println("\nPerimeter of the Shape is:"+fPerimeter);
-		System.out.println("\nColor of the Shape is:"+sColor);
+	public void calculate(){
+		System.out.println("\nArea of the Shape is: "+dArea);
+		System.out.println("\nPerimeter of the Shape is: "+dPerimeter);
+		System.out.println("\nColor of the Shape is: "+sColor);
 	}
 }
 
 class Rectangle extends Shape{
 	Scanner sc=new Scanner(System.in);	
-	
+	int iLength,iBreadth;
     void accept(){
 		System.out.print("\nEnter the length of a Rectangle:");
-		int iLength=sc.nextInt();
+		iLength=sc.nextInt();
 		System.out.print("\nEnter the breadth of a Rectangle:");
-		int iBreadth=sc.nextInt();
+		iBreadth=sc.nextInt();
 	}
-	void calcArea(){
-		fArea=0;
-		fArea=iLength*iBreadth;
+	void area(){		
+		dArea=iLength*iBreadth;
 	}
-	void calcPerimeter(){
-		fPerimeter=0;
-		fPerimeter=(iLength*2)+(iBreadth*2);
+	void perimeter(){		
+		dPerimeter=(iLength*2)+(iBreadth*2);
 	}
 	void setColor(){
 		System.out.print("\nEnter the Color of a Rectangle:");
@@ -41,18 +39,16 @@ class Rectangle extends Shape{
 
 class Circle extends Shape{
 	Scanner sc=new Scanner(System.in);
-
+    int iRadius;
 	void accept(){
 		System.out.print("\nEnter the radius of a Circle:");
-		int iRadius=sc.nextInt();
+		iRadius=sc.nextInt();
 	}
-	void calcArea(){
-		fArea=0;
-		fArea=3.14*iRadius*iRadius;
+	void area(){		
+		dArea=3.14*iRadius*iRadius;
 	}
-	void calcPerimeter(){
-		fPerimeter=0;
-		fPerimeter=2*3.14*iRadius;
+	void perimeter(){		
+		dPerimeter=2*3.14*iRadius;
 	}
 	void setColor(){
 		System.out.print("\nEnter the Color of a Circle:");
@@ -62,33 +58,31 @@ class Circle extends Shape{
 
 class Triangle extends Shape{
 	Scanner sc=new Scanner(System.in);	
-	
+	int iHeight,iBase,s,s1,s2,s3;
     void accept(){
 		System.out.print("\nEnter the Base of a Triangle:");
-		int iBase=sc.nextInt();
+		iBase=sc.nextInt();
 		System.out.print("\nEnter the Height of a Triangle:");
-		int iHeight=sc.nextInt();
+		iHeight=sc.nextInt();
 		/*System.out.print("\nEnter the sides of a Triangle:");
-		int s1=sc.nextInt();
+		s1=sc.nextInt();
 		System.out.print("\nEnter the sides of a Triangle:");
-		int s2=sc.nextInt();
+		s2=sc.nextInt();
 		System.out.print("\nEnter the sides of a Triangle:");
-		int s3=sc.nextInt();*/
+		s3=sc.nextInt();*/
 	}
-    void calcArea(){
-		fArea=0;
-		fArea=0.5*iBase*iHeight;
+    void area(){		
+		dArea=0.5*iBase*iHeight;
 	}		
-	void calcArea(float side1, float side2, float side3){        
-        float s = (side1 + side2 + side3) / 2;        
-        fArea = Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+	void area(double side1, double side2, double side3){        
+        double s = (side1 + side2 + side3) / 2;        
+        dArea = Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
     }
-	void calcPerimeter(){
-		fPerimeter=0;
-		fPerimeter=3*iBase;
+	void perimeter(){
+		dPerimeter=3*iBase;
 	}
 	void setColor(){
-		System.out.println("\nEnter the Color of a Triangle:");
+		System.out.print("\nEnter the Color of a Triangle:");
 		sColor=sc.next();
 	}
 }
@@ -104,27 +98,27 @@ public class Assn6{
             switch(iCh){
                 case 1: Rectangle rec=new Rectangle();
                         rec.accept();
-                        rec.calcArea();
-                        rec.calcPerimeter();
+                        rec.area();
+                        rec.perimeter();
                         rec.setColor();
-                        rec.printCalculated();
+                        rec.calculate();
                         break;
                 case 2: Circle cir=new Circle();
                         cir.accept();
-                        cir.calcArea();
-                        cir.calcPerimeter();
+                        cir.area();
+                        cir.perimeter();
                         cir.setColor();
-                        cir.printCalculated();
+                        cir.calculate();
                         break;
                 case 3: Triangle tri=new Triangle();
-                        //tri.accept();
-                        tri.calcArea(3,4,5);
-                        tri.calcPerimeter();
+                        tri.accept();
+                        tri.area();
+                        tri.perimeter();
                         tri.setColor();
-                        tri.printCalculated();
+                        tri.calculate();
             }
             System.out.println("\nContinue?1 for YES/0 for NO:");
-            iDoCh=sc.nextInt();
+            choice=sc.nextInt();
 		}while(choice==1);
 	}
 }
