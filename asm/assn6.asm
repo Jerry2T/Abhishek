@@ -9,11 +9,12 @@ section .data
     dmsg_len equ $-dmsg
     sblock  db 11h,22h,33h,44h,55h
     dblock times 5 db 0
+    space db " "
 
 section .bss
-    char_ans resb 2
+    charans resb 2
 
-%macro print 2
+%macro Print 2
 	mov rax,1
 	mov rdi,1
 	mov rsi,%1
@@ -34,7 +35,6 @@ section .bss
 	mov rdi,0
 	syscall
 %endmacro
-
 
 section .text
     global _start
@@ -61,7 +61,7 @@ _start:
 
     BT_NO:
         mov rsi,sblock
-        mov dsi,dblock
+        mov rdi,dblock
         mov rcx,5
 
     back:   
@@ -78,7 +78,6 @@ _start:
     next_num:
         mov al,[rsi]
         push rsi
-
         call disp_8
         Print space,1
         pop rsi
