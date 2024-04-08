@@ -15,7 +15,7 @@ section .data
     tmsg db 10,"TR"
     tmsgl equ $-tmsg
     mmsg db 10,"Machine Status Word"
-    mgmsgl equ $-mmsg
+    mmsgl equ $-mmsg
 
 section .bss
     charans resb 4
@@ -24,7 +24,6 @@ section .bss
     LDTR resw 1
     MSW resw 1
     TR resw 1
-
 
 %macro Print 2
     mov rax,1
@@ -55,8 +54,47 @@ _start:
     mov rax,[MSW]
     ror rax,1
     jc p_mode
-    Print 
+    Print rmsg,rmsglen
+    jmp next
+p_mode: 
+    Print pmsg,pmsglen
+next: 
+    SGDT [GDTR]
+    SIDT [IDTR]
+    SLDT [LDTR]
+    STR  [TR]
+    SMSW  [MSW]   
+    
+    Print gmsg,gmsgl    
+    mov ax,[GDTR+4]
+    call display
+    mov ax,[GDTR+2]
+    call display
+    Print colon,1
+    mov ax,[GDTR+0]
+    call display
 
+    Print imsg,imsgl    
+    mov ax,[IDTR+4]
+    call display
+    mov ax,[IDTR+2]
+    call display
+    Print colon,1
+    mov ax,[IDTR+0]
+    call display
+
+    Print lmsg,lmsgl    
+    mov ax,[LDTR]
+    call display
+    Print tmsg,tmsgl
+    mov ax,[TR]
+    call display
+    Print mmsg,mmsgl
+    mov ax,[MSW]
+    call display
+
+    Print nline,nlen
+    exit
 
 display:
     mov rbx,16
